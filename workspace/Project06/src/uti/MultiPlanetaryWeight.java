@@ -13,7 +13,7 @@ public class MultiPlanetaryWeight {
 		String planet = sc.next();
 		switch (planet){
 		case "Mercury":
-			weight *= 0.38;
+			weight = 0.38 * weight;
 			System.out.println("Your weight on " + planet + " is " + weight + "kg.");
 			break;
 		case "Venus":
