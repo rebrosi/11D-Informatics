@@ -17,19 +17,21 @@ public class AnagramFinder {
 		String newSecondWord = "";
 		
 		for(int i = 0; i < lengthOfFirstWord; i++){
-			if (firstWord.charAt(i) >= 65 && firstWord.charAt(i) <= 90 ||  firstWord.charAt(i) >= 97 && firstWord.charAt(i) <= 122){
+			if ((firstWord.charAt(i) >= 65 && firstWord.charAt(i) <= 90 ||  firstWord.charAt(i) >= 97 && firstWord.charAt(i) <= 122)){
+//				newFirstWord = firstWord.replace(firstWord.charAt(i), '\0');
+//				lengthOfFirstWord = newFirstWord.length();
 				newFirstWord += firstWord.charAt(i);
 			}
 		}
 		
+		System.out.print(newFirstWord);
+		
 		for(int i = 0; i < lengthOfSecondWord; i++){
-			if (secondWord.charAt(i) >= 65 && secondWord.charAt(i) <= 90 ||  secondWord.charAt(i) >= 97 && secondWord.charAt(i) <= 122){
-				newSecondWord += secondWord.charAt(i);
+			if (!(secondWord.charAt(i) >= 65 && secondWord.charAt(i) <= 90 ||  secondWord.charAt(i) >= 97 && secondWord.charAt(i) <= 122)){
+				newSecondWord = secondWord.replace(secondWord.charAt(i), '\0');
+				lengthOfSecondWord = newSecondWord.length();
 			}
 		}
-		
-		lengthOfFirstWord = newFirstWord.length();
-		lengthOfSecondWord = newSecondWord.length();
 		
 		if (lengthOfFirstWord == lengthOfSecondWord){
 			for(int i = 0; i < lengthOfFirstWord; i++){
@@ -38,7 +40,6 @@ public class AnagramFinder {
 					AreTheyAnagrams = false;
 					break;
 				}else{
-					// removes the letter in order to avoid the problem with double letters
 					newSecondWord = newSecondWord.substring(0, index) + newSecondWord.substring(index + 1);
 				}
 			}
@@ -52,6 +53,7 @@ public class AnagramFinder {
 		} else {
 			System.out.println("They are not anagrams!");
 		}
+		
 	}
 
 }
