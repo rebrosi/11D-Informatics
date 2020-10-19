@@ -12,18 +12,70 @@ public class TV {
 		on = false;
 	}
 	public void setChannel(int newChannel){
-		if (newChannel < 0 || newChannel > 120){
-			System.out.println ("That is an invalid channel");
-			return;
+		if (on) {
+			if (newChannel < 0 || newChannel > 120){
+				System.out.println ("That is an invalid channel");
+				return;
+			}
+		} else {
+			System.out.println("The TV is off");
 		}
 		channel = newChannel;
 	}
 	public void setVolume (int newVolumeLevel){
-		if (newVolumeLevel < 1 || newVolumeLevel > 7){
-			System.out.println ("That is an invalid volume");
-			return;
+		if (on) {
+			if (newVolumeLevel < 1 || newVolumeLevel > 7){
+				System.out.println ("That is an invalid volume");
+				return;
+			}
+		} else {
+			System.out.println("The TV is off");
 		}
 		volumeLevel = newVolumeLevel;
+	}
+	public void channelUp () {
+		if (on) {
+			if (channel + 1 > 120) {
+				System.out.println ("That is an invalid channel");
+				return;
+			}
+		} else {
+			System.out.println("The TV is off");
+		}
+		channel++;
+	}
+	public void channelDown () {
+		if (on) {
+			if (channel - 1 < 0) {
+				System.out.println ("That is an invalid channel");
+				return;
+			}
+		} else {
+			System.out.println("The TV is off");
+		}
+		channel--;
+	}
+	public void volumeUp () {
+		if (on) {
+			if (volumeLevel + 1 > 7) {
+				System.out.println ("That is an invalid volume");
+				return;
+			}
+		} else {
+			System.out.println("The TV is off");
+		}
+		volumeLevel++;
+	}
+	public void volumeDown () {
+		if (on) {
+			if (volumeLevel - 1 < 0) {
+				System.out.println ("That is an invalid volume");
+				return;
+			}
+		} else {
+			System.out.println("The TV is off");
+		}
+		volumeLevel--;
 	}
 	
 }
