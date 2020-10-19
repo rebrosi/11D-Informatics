@@ -7,20 +7,20 @@ public class KeyToTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
-		String[][] answersOfStudents = new String[8][10];
-		String[] key = new String[10];
+		char[][] answersOfStudents = new char[8][10];
+		char[] key = new char[10];
 		
 		System.out.println("Enter the answers of the students:");
 		for(int i = 0; i < answersOfStudents.length; i++) {
     		System.out.print("Student " + (i + 1) + ": ");
 	    	for(int j = 0; j < answersOfStudents[i].length; j++) {
-				answersOfStudents[i][j] = sc.next();
+				answersOfStudents[i][j] = sc.nextLine().charAt(0);
 	    	}
 	    }
 		
 		System.out.println("Enter the right answers:");
 		for(int i = 0; i < key.length; i++) {
-			key[i] = sc.next();
+			key[i] = sc.nextLine().charAt(0);
 		}
 		
 		for(int i = 0; i < answersOfStudents.length; i++) {
