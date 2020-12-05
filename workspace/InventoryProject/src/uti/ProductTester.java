@@ -39,15 +39,44 @@ public class ProductTester {
 	
 	public static void addToInventory(Product[] products, int maxSize) {
 		Scanner in = new Scanner(System.in);
+		int stockChoice = -1;
+		while(stockChoice != 1 || stockChoice != 2) {
+			System.out.println("1: CD\n2: DVD\nPlease enter the product type:");
+			stockChoice = in.nextInt();
+			//System.out.println("Stock Choice is " + stockChoice);
+			if (stockChoice == 1 ) {
+				addCDToInventory(products, maxSize);
+				break;
+			}else if (stockChoice == 2 ){
+				addDVDToInventory(products, maxSize);
+				break;
+			} else {
+				System.out.println("Only numbers 1 or 2 allowed!");
+			}
+		}
+		
+	}
+	
+	public static void addCDToInventory(Product[] products, int maxSize) {
+		Scanner in = new Scanner(System.in);
 		int tempNumber;
 		String tempName;
 		int tempQty;
 		double tempPrice;
+		String tempArtist;
+		int tempNumberOfSongs;
+		String tempLabel;
 		for(int i = 0; i<maxSize; i++) {
         	in.nextLine();
         	//ask the user to enter the product information
-    		System.out.print("\n\nPlease enter the product name: ");
+    		System.out.print("\n\nPlease enter the CD name: ");
     		tempName = in.nextLine();
+    		System.out.print("Please enter the artist name: ");
+    		tempArtist = in.nextLine();
+    		System.out.print("Please enter the record label name: ");
+    		tempLabel = in.nextLine();
+    		System.out.print("Please enter the number of songs: ");
+    		tempNumberOfSongs = in.nextInt();
     		System.out.print("Please enter the quantity of stock for this product: ");
     		tempQty = in.nextInt();
     		System.out.print("Please enter the price for this product: ");
@@ -55,7 +84,38 @@ public class ProductTester {
     		System.out.print("Please enter the item number: ");
     		tempNumber = in.nextInt();
     		//create a product object and store it in the products array
-    		products[i] = new Product(tempNumber, tempName, tempQty, tempPrice);
+    		products[i] = new CD(tempNumber, tempName, tempQty, tempPrice, tempArtist, tempNumberOfSongs, tempLabel);
+        }//endfor
+	}
+	
+	public static void addDVDToInventory(Product[] products, int maxSize) {
+		Scanner in = new Scanner(System.in);
+		int tempNumber;
+		String tempName;
+		int tempQty;
+		double tempPrice;
+		int tempLengthMinutes;
+		int tempAgeRating;
+		String tempFilmStudio;
+		for(int i = 0; i<maxSize; i++) {
+        	in.nextLine();
+        	//ask the user to enter the product information
+    		System.out.print("\n\nPlease enter the DVD name: ");
+    		tempName = in.nextLine();
+    		System.out.print("\n\nPlease enter the flm studio name: ");
+    		tempFilmStudio = in.nextLine();
+    		System.out.print("Please enter the age rating: ");
+    		tempAgeRating = in.nextInt();
+    		System.out.print("Please enter the length in minutes: ");
+    		tempLengthMinutes = in.nextInt();
+    		System.out.print("Please enter the quantity of stock for this product: ");
+    		tempQty = in.nextInt();
+    		System.out.print("Please enter the price for this product: ");
+    		tempPrice = in.nextDouble();
+    		System.out.print("Please enter the item number: ");
+    		tempNumber = in.nextInt();
+    		//create a product object and store it in the products array
+    		products[i] = new DVD(tempNumber, tempName, tempQty, tempPrice, tempLengthMinutes, tempAgeRating, tempFilmStudio);
         }//endfor
 	}
 	

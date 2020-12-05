@@ -24,7 +24,11 @@ public class Product {
     }//end constructor
 
     public void addToInventory(int quantity){
-    	qtyInStock += quantity;
+    	if(active) {
+    		qtyInStock += quantity;
+    	} else {
+    		System.out.println("You cannot add to this product because is discountinued");
+    	}
     }
     
     public void deductFromInventory(int quantity){
