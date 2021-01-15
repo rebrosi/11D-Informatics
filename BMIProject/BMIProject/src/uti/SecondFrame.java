@@ -1,21 +1,28 @@
 package uti;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-public class SecondFrame extends JFrame{
-	//public second() {
-	public static void main(String[] args) {
-		JFrame frame2 = new JFrame();
-		frame2.setSize(400, 100);
+public class SecondFrame extends JFrame implements ActionListener{
+	//creating the strings that are going to be used to collect the height and weight
+	//from the first frame
+	String height = "";
+	String weight = "";
+	public SecondFrame(String heightText, String weightText) {
+		//JFrame frame2 = new JFrame();
+		this.setSize(400, 100);
 		
-		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		frame2.add(panel);
+		this.add(panel);
 		
 		SpringLayout layout = new SpringLayout();
 		panel.setLayout(layout);
@@ -26,10 +33,10 @@ public class SecondFrame extends JFrame{
 		greetingLabel.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.NORTH, greetingLabel,
                 5,
-                SpringLayout.NORTH, frame2);
+                SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, greetingLabel,
                 5,
-                SpringLayout.WEST, frame2);
+                SpringLayout.WEST, this);
 		panel.add(greetingLabel);
 		
 		//creating and specifying the constraints for the thanks button
@@ -37,10 +44,13 @@ public class SecondFrame extends JFrame{
 		thanksButton.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.WEST, thanksButton,
                 50,
-                SpringLayout.WEST, frame2);
+                SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, thanksButton,
                 30,
-                SpringLayout.NORTH, frame2);
+                SpringLayout.NORTH, this);
+		//setting the functionality of the button
+		thanksButton.addActionListener (this);
+		thanksButton.setActionCommand("thanks");
 		panel.add(thanksButton);
 		
 		//creating and specifying the constraints for the final results button
@@ -51,9 +61,30 @@ public class SecondFrame extends JFrame{
                 SpringLayout.EAST, thanksButton);
 		layout.putConstraint(SpringLayout.NORTH, finalResultsButton,
                 30,
-                SpringLayout.NORTH, frame2);
+                SpringLayout.NORTH, this);
+		//setting the functionality of the button
+		finalResultsButton.addActionListener(this);
+		height = heightText;
+		weight = weightText;
 		panel.add(finalResultsButton);
 		
-		frame2.setVisible(true);
+		this.setVisible(true);
 	}
+	
+		  public void actionPerformed (ActionEvent e) {     
+		    //this.setVisible(false);
+		    if (e.getActionCommand().equals("thanks")) {
+		    	this.setVisible(false);
+		    }else {
+			    double heightInNumber = Double.parseDouble(height);
+			    double weightInNumber = Double.parseDouble(weight);
+			    double result = weightInNumber / (heightInNumber / 100 * heightInNumber / 100);
+			    String message = "your BMI is:\n" + Math.round(result * 100.0) / 100.0;
+			    JOptionPane.showMessageDialog(this, message);
+		    }
+		  }
+	
+	
+	
 }
+

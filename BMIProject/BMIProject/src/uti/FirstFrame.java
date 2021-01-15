@@ -1,6 +1,9 @@
 package uti;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -9,15 +12,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-public class FirstFrame extends JFrame{
-	public static void main(String[] args) {
-	//public first(){	
-		JFrame frame1 = new JFrame("BMI calculator");
-		frame1.setSize(280, 170);
+public class FirstFrame extends JFrame implements ActionListener{
+	JButton resultsButton = new JButton("show me my BMI");
+	JTextField heightText = new JTextField(9);
+	JTextField weightText = new JTextField(9);
+	public FirstFrame(){	
+		this.setSize(280, 170);
 		
-		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
-		frame1.add(panel);
+		this.add(panel);
 		
 		SpringLayout layout = new SpringLayout();
 		panel.setLayout(layout);
@@ -27,7 +31,7 @@ public class FirstFrame extends JFrame{
 		titleLabel.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.WEST, titleLabel,
                 5,
-                SpringLayout.WEST, frame1);
+                SpringLayout.WEST, this);
 		panel.add(titleLabel);
 		
 		//creating and specifying the constraints for the sex label
@@ -38,7 +42,7 @@ public class FirstFrame extends JFrame{
                 SpringLayout.SOUTH, titleLabel);
 		layout.putConstraint(SpringLayout.WEST, sexLabel,
                 10,
-                SpringLayout.WEST, frame1);
+                SpringLayout.WEST, this);
 		panel.add(sexLabel);
 		
 		//creating and specifying the constraints for the choices for sex
@@ -60,11 +64,10 @@ public class FirstFrame extends JFrame{
 				SpringLayout.SOUTH, sexLabel);
 		layout.putConstraint(SpringLayout.WEST, heightLabel,
 				10,
-				SpringLayout.WEST, frame1);
+				SpringLayout.WEST, this);
 		panel.add(heightLabel);
 		
 		//creating and specifying the constraints for the height text field
-		JTextField heightText = new JTextField(9);
 		heightText.setBounds(100, 20, 165, 25);
 		layout.putConstraint(SpringLayout.WEST, heightText,
                 8,
@@ -82,11 +85,10 @@ public class FirstFrame extends JFrame{
 				SpringLayout.SOUTH, heightLabel);
 		layout.putConstraint(SpringLayout.WEST, weightLabel,
 				10,
-				SpringLayout.WEST, frame1);
+				SpringLayout.WEST, this);
 		panel.add(weightLabel);
 		
 		//creating and specifying the constraints for the weight text field
-		JTextField weightText = new JTextField(9);
 		weightText.setBounds(100, 20, 165, 25);
 		layout.putConstraint(SpringLayout.WEST, weightText,
                 5,
@@ -97,7 +99,6 @@ public class FirstFrame extends JFrame{
 		panel.add(weightText);
 		
 		//creating and specifying the constraints for the result button
-		JButton resultsButton = new JButton("show me my BMI");
 		resultsButton.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.WEST, resultsButton,
                 20,
@@ -105,9 +106,18 @@ public class FirstFrame extends JFrame{
 		layout.putConstraint(SpringLayout.NORTH, resultsButton,
                 50,
                 SpringLayout.NORTH, heightText);
+		resultsButton.addActionListener(this);
 		panel.add(resultsButton);
 		
-		//frame1.pack();
-		frame1.setVisible(true);
+		this.setVisible(true);
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//creating the second frame and giving the info that we collected
+		//from the first one as parameters so it be used to calculate the result
+		SecondFrame second = new SecondFrame(heightText.getText(), weightText.getText());
+		this.setVisible(false);
+		
 	}
 }
