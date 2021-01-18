@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
@@ -26,7 +27,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 		SpringLayout layout = new SpringLayout();
 		panel.setLayout(layout);
 		
-		//creating and specifying the constraints for the title
+		// creating and specifying the constraints for the title
 		JLabel titleLabel = new JLabel("BMI calculator");
 		titleLabel.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.WEST, titleLabel,
@@ -34,7 +35,7 @@ public class FirstFrame extends JFrame implements ActionListener{
                 SpringLayout.WEST, this);
 		panel.add(titleLabel);
 		
-		//creating and specifying the constraints for the sex label
+		// creating and specifying the constraints for the sex label
 		JLabel sexLabel = new JLabel ("sex");
 		sexLabel.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.NORTH, sexLabel,
@@ -45,8 +46,8 @@ public class FirstFrame extends JFrame implements ActionListener{
                 SpringLayout.WEST, this);
 		panel.add(sexLabel);
 		
-		//creating and specifying the constraints for the choices for sex
-		String[] sexStrings = { "female", "male", "helicopter", "other"};
+		// creating and specifying the constraints for the choices for sex
+		String[] sexStrings = {"female", "male", "helicopter", "other"};
 		JComboBox sexChoice = new JComboBox(sexStrings);
 		layout.putConstraint(SpringLayout.WEST, sexChoice,
                 23,
@@ -56,7 +57,7 @@ public class FirstFrame extends JFrame implements ActionListener{
                 SpringLayout.SOUTH, titleLabel);
 		panel.add(sexChoice);
 		
-		//creating and specifying the constraints for the height label
+		// creating and specifying the constraints for the height label
 		JLabel heightLabel = new JLabel("height");
 		heightLabel.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.NORTH, heightLabel, 
@@ -67,7 +68,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 				SpringLayout.WEST, this);
 		panel.add(heightLabel);
 		
-		//creating and specifying the constraints for the height text field
+		// specifying the constraints for the height text field
 		heightText.setBounds(100, 20, 165, 25);
 		layout.putConstraint(SpringLayout.WEST, heightText,
                 8,
@@ -77,7 +78,7 @@ public class FirstFrame extends JFrame implements ActionListener{
                 SpringLayout.SOUTH, sexChoice);
 		panel.add(heightText);
 		
-		//creating and specifying the constraints for the weight label
+		// creating and specifying the constraints for the weight label
 		JLabel weightLabel = new JLabel("weight");
 		weightLabel.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.NORTH, weightLabel, 
@@ -88,7 +89,7 @@ public class FirstFrame extends JFrame implements ActionListener{
 				SpringLayout.WEST, this);
 		panel.add(weightLabel);
 		
-		//creating and specifying the constraints for the weight text field
+		// specifying the constraints for the weight text field
 		weightText.setBounds(100, 20, 165, 25);
 		layout.putConstraint(SpringLayout.WEST, weightText,
                 5,
@@ -98,7 +99,7 @@ public class FirstFrame extends JFrame implements ActionListener{
                 SpringLayout.SOUTH, heightText);
 		panel.add(weightText);
 		
-		//creating and specifying the constraints for the result button
+		// specifying the constraints for the result button
 		resultsButton.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.WEST, resultsButton,
                 20,
@@ -112,12 +113,20 @@ public class FirstFrame extends JFrame implements ActionListener{
 		this.setVisible(true);
 		
 	}
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
-		//creating the second frame and giving the info that we collected
-		//from the first one as parameters so it be used to calculate the result
-		SecondFrame second = new SecondFrame(heightText.getText(), weightText.getText());
-		this.setVisible(false);
-		
+		// checking if the entered values are numbers and are there even entered values
+		try {
+			double heightInNumber = Double.parseDouble(heightText.getText());
+			double weightInNumber = Double.parseDouble(weightText.getText());
+			// creating the second frame and giving the info that we collected
+			// from the first one as parameters so it be used to calculate the result
+			SecondFrame second = new SecondFrame(heightInNumber, weightInNumber);
+			this.setVisible(false);
+		} catch (Exception NumberFormatException) {
+			String NotNumberAlert = "Please enter numerical answer";
+			JOptionPane.showMessageDialog(this, NotNumberAlert);
+		}
+
 	}
 }
