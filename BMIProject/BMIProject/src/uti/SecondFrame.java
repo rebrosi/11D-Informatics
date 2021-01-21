@@ -16,7 +16,7 @@ public class SecondFrame extends JFrame implements ActionListener{
 	double heightInNumber;
 	double weightInNumber;
 	public SecondFrame(double height, double weight) {
-		this.setSize(400, 100);
+		this.setSize(310, 110);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -27,26 +27,28 @@ public class SecondFrame extends JFrame implements ActionListener{
 		panel.setLayout(layout);
 
 		// creating and specifying the constraints for the greeting label
-		JLabel greetingLabel = new JLabel("we have the results and ...\n" + 
-										"at least you are beautiful on the inside");
+		//<html> and <br> are added in order to make greetingLabel on two separate lines
+		// &nbsp; is for space, because the normal space isn't working when it comes to labels
+		JLabel greetingLabel = new JLabel("<html>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ "we have the results and...<br>at least you are beautiful on the inside</html>");
 		greetingLabel.setBounds(10, 20, 80, 25);
-		layout.putConstraint(SpringLayout.NORTH, greetingLabel,
-                5,
-                SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, greetingLabel,
-                5,
-                SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, greetingLabel,
+                0,
+                SpringLayout.HORIZONTAL_CENTER, panel);
+//		layout.putConstraint(SpringLayout.WEST, greetingLabel,
+//                5,
+//                SpringLayout.WEST, this);
 		panel.add(greetingLabel);
 		
 		// creating and specifying the constraints for the thanks button
 		JButton thanksButton = new JButton("ooh thanks");
 		thanksButton.setBounds(10, 20, 80, 25);
 		layout.putConstraint(SpringLayout.WEST, thanksButton,
-                50,
-                SpringLayout.WEST, this);
+                10,
+                SpringLayout.WEST, panel);
 		layout.putConstraint(SpringLayout.NORTH, thanksButton,
-                30,
-                SpringLayout.NORTH, this);
+                40,
+                SpringLayout.NORTH, panel);
 		// setting the functionality of the button
 		thanksButton.addActionListener (this);
 		// setting an action command in order to distinguish 
@@ -61,8 +63,8 @@ public class SecondFrame extends JFrame implements ActionListener{
                 10,
                 SpringLayout.EAST, thanksButton);
 		layout.putConstraint(SpringLayout.NORTH, finalResultsButton,
-                30,
-                SpringLayout.NORTH, this);
+                40,
+                SpringLayout.NORTH, panel);
 		// setting the functionality of the button
 		finalResultsButton.addActionListener(this);
 		// saving the values of the height and the weight on the variables we
@@ -79,10 +81,15 @@ public class SecondFrame extends JFrame implements ActionListener{
 		if (e.getActionCommand().equals("thanks")) {
 			this.setVisible(false);
 		} else {
+			
 			double result = weightInNumber / (heightInNumber / 100 * heightInNumber / 100);
-			String message = "your BMI is:\n" + Math.round(result * 100.0) / 100.0;
-			JOptionPane.showMessageDialog(this, message);
+			String message = "your BMI is: " + Math.round(result * 100.0) / 100.0;
+			JOptionPane.showMessageDialog(this,
+	                message,
+	                "Not bad. Not bad at all.",
+	                1);
 			this.setVisible(false);
+			
 		}
 	}
 	
